@@ -61,4 +61,210 @@ function checkEvenOrOdd() {
  }
 }
 // Call the function
-checkEvenOrOdd()
+checkEvenOrOdd();
+
+4.Demonstrate its use by writing the code which create a simple text file with the data
+provided by the user.
+const fs = require('fs');
+const readline = require('readline');
+// Create an interface for reading input
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+// Function to prompt user for input and write to file
+function createFileWithUserInput() {
+    rl.question('Please enter the content you want to write to the file: ', (userInput) => {
+        // Define the file name
+        const fileName = 'output.txt';
+        // Write user input to the file
+        fs.writeFile(fileName, userInput, (err) => {
+            if (err) {
+                console.error('Error writing to file:', err);
+            } else {
+                console.log(`Successfully wrote to ${fileName}`);
+            }
+            // Close the readline interface
+            rl.close();
+        });
+    });
+}
+// Call the function
+createFileWithUserInput();
+
+Q.5 Write a code making use of HOOKS useState function that display the number of times
+button nammed “CLICK” is clicked.
+import React, { useState } from 'react';
+
+function ClickCounter() {
+    // Declare a state variable "count" initialized to 0
+    const [count, setCount] = useState(0);
+
+    // Function to increment the count when the button is clicked
+    const handleClick = () => {
+        setCount(count + 1);
+    };
+
+    return (
+        <div>
+            <h1>Button clicked {count} times</h1>
+            <button onClick={handleClick}>CLICK</button>
+        </div>
+    );
+}
+
+export default ClickCounter;
+
+Q.6 Write a class component with constructure to update state in react using state and props.
+import React, { Component } from 'react';
+class Greeting extends Component {
+    constructor(props) {
+        super(props);
+        // Initialize state
+        this.state = {
+            name: this.props.name || 'Guest'
+        };
+    }
+    // Method to update state based on input
+    handleChange = (event) => {
+        this.setState({ name: event.target.value });
+    };
+    render() {
+        return (
+            <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                <h1>Hello, {this.state.name}!</h1>
+                <input
+                    type="text"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                    placeholder="Enter your name"
+                />
+            </div>
+        );
+    }
+}
+// Main App component
+class App extends Component {
+    render() {
+        return (
+            <div>
+                <Greeting name="User" />
+            </div>
+        );
+    }
+}
+export default App;
+
+
+Q.7 Write a class component without constructure to update state in react using state and
+props
+import React, { Component } from 'react';
+class Greeting extends Component {
+    // Initialize state directly as a class property
+    state = {
+        name: this.props.name || 'Guest'
+    };
+    // Method to update state based on input
+    handleChange = (event) => {
+        this.setState({ name: event.target.value });
+    };
+    render() {
+        return (
+            <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                <h1>Hello, {this.state.name}!</h1>
+                <input
+                    type="text"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                    placeholder="Enter your name"
+                />
+            </div>
+        );
+    }
+}
+// Main App component
+class App extends Component {
+    render() {
+        return (
+            <div>
+                <Greeting name="User" />
+            </div>
+        );
+    }
+}
+export default App;
+
+Q8)Write a program in react to update state and props with functional component.
+import React, { useState } from 'react';
+// Functional component that accepts props
+const Greeting = ({ initialName }) => {
+ // State to hold the name
+ const [name, setName] = useState(initialName || 'Guest');
+ // Function to handle input change
+ const handleChange = (event) => {
+ setName(event.target.value);
+ };
+ return (
+ <div style={{ textAlign: 'center', marginTop: '50px' }}>
+ <h1>Hello, {name}!</h1>
+ <input
+ type="text"
+ value={name}
+ onChange={handleChange}
+ placeholder="Enter your name"
+ />
+ </div>
+ );
+};
+// Main App component
+const App = () => {
+ return (
+ <div>
+ <Greeting initialName="User" />
+ </div>
+ );
+};
+export default App;
+
+
+9) Create one class components “Car” in React and invoke it using index.js it
+// src/Car.js
+import React, { Component } from 'react';
+class Car extends Component {
+ render() {
+ const { make, model, year } = this.props; // Destructure props
+ return (
+ <div style={{ textAlign: 'center', marginTop: '50px' }}>
+ <h1>Car Details</h1>
+ <p>Make: {make}</p>
+ <p>Model: {model}</p>
+ <p>Year: {year}</p>
+ </div>
+ );
+ }
+}
+export default Car;
+// src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import Car from './Car'; // Import the Car component
+// Create a simple App component to render Car
+const App = () => {
+ return (
+ <div>
+ <Car make="Toyota" model="Camry" year="2020" />
+ </div>
+ );
+};
+// Render the App component
+ReactDOM.render(
+ <React.StrictMode>
+ <App />
+ </React.StrictMode>,
+ document.getElementById('root')
+);
+
+
+
+
